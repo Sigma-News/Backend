@@ -20,7 +20,7 @@ public class StatsHandler extends AbstractHandler {
     /*
     * Writing the response, for the stats request over netty
     */
-
+    System.out.println("New Statrequest!");
     response.setContentType("application/json; charset=UTF-8");
     PrintWriter printout = response.getWriter();
     JSONObject JObject = new JSONObject();

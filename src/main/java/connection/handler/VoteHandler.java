@@ -14,6 +14,7 @@ public class VoteHandler extends AbstractHandler {
 
   public void handle(String s, Request request, HttpServletRequest httpServletRequest,
       HttpServletResponse httpServletResponse) throws IOException, ServletException {
+    System.out.println("New Statrequest!");
     Object link = (String) httpServletRequest.getParameter("link");
     int vote = Integer.parseInt(httpServletRequest.getParameter("vote"));
     System.out.println(link);

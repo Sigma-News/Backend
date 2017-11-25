@@ -11,8 +11,8 @@ import org.eclipse.jetty.server.handler.ContextHandlerCollection;
 /**
  * Creation of Flawn
  */
-public class RequestManager {
-  public static void main(String[] args)  {
+public class RequestManager extends Thread {
+  public void run()  {
   try {
       System.out.println("Listening on Reqs...");
     Server server = new Server(Config.PORT);
