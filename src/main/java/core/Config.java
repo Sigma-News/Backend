@@ -1,3 +1,5 @@
+package core;
+
 /**
  * Creation of Flawn
  */
