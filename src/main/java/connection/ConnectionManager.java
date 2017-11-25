@@ -1,4 +1,4 @@
-package server;
+package connection;
 
 import core.Config;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
  */
 public class ConnectionManager {
   public ConnectionManager(){
-    System.out.println("Starting server...");
+    System.out.println("Starting connection...");
 
     try {
       InetAddress inetAddress = InetAddress.getByName("192.168.1.1");
