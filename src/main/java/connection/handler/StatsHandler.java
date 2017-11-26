@@ -24,8 +24,8 @@ public class StatsHandler extends AbstractHandler {
     response.setContentType("application/json; charset=UTF-8");
     PrintWriter printout = response.getWriter();
     JSONObject JObject = new JSONObject();
-    JObject.put("Response", "1");
-    JObject.put("Message", "Client unauthorized");
+    JObject.put("up", "1000");
+    JObject.put("down", "300");
 
     printout.print(JObject);
     printout.flush();

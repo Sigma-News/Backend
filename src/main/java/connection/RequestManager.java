@@ -21,7 +21,6 @@ public class RequestManager extends Thread {
     ContextHandler votingContext = new ContextHandler();
     votingContext.setContextPath("/vote");
     votingContext.setHandler(new VoteHandler());
-
     // Handler for the stats API
     ContextHandler statContext = new ContextHandler();
     statContext.setContextPath("/stats");
@@ -29,7 +28,7 @@ public class RequestManager extends Thread {
 
     // summing all the Handlers up to one
     ContextHandlerCollection contexts = new ContextHandlerCollection();
-    contexts.setHandlers(new Handler[] { votingContext, statContext });
+    contexts.setHandlers(new Handler[] { votingContext, statContext});
     server.setHandler(contexts);
     server.start();
     server.join();
