@@ -2,7 +2,7 @@ package core;
 
 import DB.MongoDBManager;
 
-import connection.RequestManager;
+import connection.handler.RequestManager;
 
 /**
  * Creation of Flawn

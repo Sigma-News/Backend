@@ -1,4 +1,4 @@
-package connection;
+package connection.handler;
 
 import connection.handler.StatsHandler;
 import connection.handler.VoteHandler;
