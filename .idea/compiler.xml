@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Backend-Sigmanews" target="1.5" />
+      <module name="Backend-Sigmanews" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>
