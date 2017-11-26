@@ -4,27 +4,28 @@ package DB;
         TODO:  - Indexes müssen noch eingefügt werden.
          */
 
+import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Accumulators;
+import com.mongodb.client.model.Aggregates;
 import org.bson.Document;
+
+import java.util.Arrays;
 import java.util.Date;
 
 public class MongoDBManager extends Thread{
 
     private MongoClient client;
     private MongoDatabase db;
+    //MongoCollection collection;
     private String host;
     private String database;
     private String user;
     private String password;
-
-    public MongoDBManager(String host, String database, String user, String password){
-        this.host = host;
-        this.database = database;
-        this.user = user;
-        this.password = user;
-    }
 
     /**
      * Konstruktor stellt Verbindung zu MongoDB-Server her
@@ -33,6 +34,13 @@ public class MongoDBManager extends Thread{
      * @param user Der zu benutzende Benutzer.
      * @param password Das zu benutzende Passwort des Benutzers.
      */
+    public MongoDBManager(String host, String database, String user, String password){
+        this.host = host;
+        this.database = database;
+        this.user = user;
+        this.password = user;
+    }
+
     public void run()
     {
         System.out.println("Starting MongoDB Manager...");
@@ -45,17 +53,16 @@ public class MongoDBManager extends Thread{
         if(db.getCollection("ratings") == null) db.createCollection("ratings");
     }
 
-    /*public static void main(String[] args)
+    /**
+     * Es wird ein neues Objekt der Klasse MongoDBHandler
+     * @param args Initialisionswerte
+     */
+    public static void main(String[] args)
     {
         MongoDBManager man = new MongoDBManager(args[0], args[1], args[2], args[3]);
         for(String item : args) System.out.println(item);
-    }*/
+    }
 
-    /**
-     * Die Methode storeURL speichert eine URL mit der gegebenen Bewertung und der aktuellen Zeit.
-     * @param URL Die URL wird übergeben.
-     * @param trusted Vertrauenswürdige Einschätzung, wenn trusted = true ist.
-     */
     private void storeURL(String URL, boolean trusted)
     {
         int value;
@@ -79,8 +86,20 @@ public class MongoDBManager extends Thread{
     //TODO: Elemente gruppieren und average Value berechnen
     public int returnValueToURL(String URL)
     {
-        int rating = 0;
-        return rating;
+        Block<Document> printBlock = new Block<Document>() {
+            @Override
+            public void apply(final Document document) {
+                System.out.println(document.toJson());
+            }
+        };
+        MongoCollection<Document> collection = db.getCollection("ratings");
+
+        collection.aggregate(
+                Arrays.asList(
+                        Aggregates.group("URL", Accumulators.avg("rating", 1))))
+                .forEach(printBlock);
+        System.out.println(printBlock.toString());
+        return 0;
     }
 
     /**
