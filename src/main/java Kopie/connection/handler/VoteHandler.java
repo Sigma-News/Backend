@@ -12,23 +12,25 @@ import org.json.JSONObject;
 /**
  * Creation of Flawn
  */
-public class StatsHandler extends AbstractHandler {
-
+public class VoteHandler extends AbstractHandler {
 
   public void handle(String s, Request request, HttpServletRequest httpServletRequest,
-      HttpServletResponse response) throws IOException, ServletException {
-    /*
-    * Writing the response, for the stats request over netty
-    */
-    System.out.println("New Statrequest!");
-    response.setContentType("application/json; charset=UTF-8");
-    PrintWriter printout = response.getWriter();
+      HttpServletResponse httpServletResponse) throws IOException, ServletException {
+
+
+    System.out.println("New Voterequest!");
+    Object link = (String) httpServletRequest.getParameter("link");
+    int vote = Integer.parseInt(httpServletRequest.getParameter("vote"));
+    System.out.println(link);
+    System.out.println(vote);
+    httpServletResponse.setContentType("application/json; charset=UTF-8");
+    PrintWriter printout = httpServletResponse.getWriter();
     JSONObject JObject = new JSONObject();
-    JObject.put("down", "1000");
-    JObject.put("up", "300");
+    JObject.put("ok", "300");
 
     printout.print(JObject);
     printout.flush();
+
 
   }
 
